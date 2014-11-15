@@ -11,7 +11,9 @@
 |
 */
 
-Route::get('/', function()
+Route::get('/admin', function()
 {
-	return View::make('hello');
+    return View::make('admin');
 });
+Route::post('admin/postLogin', 'AdminController@postLogin');
+
