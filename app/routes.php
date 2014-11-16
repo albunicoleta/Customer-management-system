@@ -16,4 +16,8 @@ Route::get('/admin', function()
     return View::make('admin');
 });
 Route::post('admin/postLogin', 'AdminController@postLogin');
+Route::get('admin/dashboard', array('before' => 'auth', function()
+{
+    return View::make('admin/dashboard');
+}));
 
