@@ -2,10 +2,19 @@
 
 @section('content')
 <div class="form-horizontal">
+    @if(Session::has('login-failed'))
+        <div class="alert-warning">
+            <h5>Bad credentials!</h5>
+        </div>
+    @endif
+    @if(Session::has('please-login'))
+        <div class="alert-warning">
+            <h5>Please login first!</h5>
+        </div>
+    @endif
     {{ Form::open(array('url' => 'admin/postLogin')) }}
             <h1>Login</h1>
 
-            <!-- if there are login errors, show them here -->
             <p>
                     {{ $errors->first('username') }}
                     {{ $errors->first('password') }}

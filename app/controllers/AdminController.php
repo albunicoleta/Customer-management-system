@@ -12,8 +12,7 @@ class AdminController extends BaseController {
             /* @todo redirect to a proper route */
             return Redirect::intended('admin/dashboard');
         }
-        
-        return Redirect::intended('/admin');
+        return Redirect::to('/admin')->with('login-failed',true);
     }
 
 }
