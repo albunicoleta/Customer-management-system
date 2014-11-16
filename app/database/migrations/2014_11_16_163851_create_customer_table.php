@@ -18,10 +18,10 @@ class CreateCustomerTable extends Migration {
             $table->string('firstname');
             $table->string('lastname');
             $table->string('address');
-            $table->string('phone');
+            $table->string('phone')->nullable();
             $table->string('email')->unique();
-            $table->string('city');
-            $table->boolean('newsletter');
+            $table->string('city')->nullable();
+            $table->boolean('newsletter')->default(false);
             $table->timestamps();
         });
     }
