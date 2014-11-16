@@ -28,7 +28,7 @@ class CreateAdminTable extends Migration {
      */
     public function down() {
         //drop admin table
-        Schema::drop('admin');
+        Schema::drop(Admin::TABLE_NAME);
     }
 
 }
