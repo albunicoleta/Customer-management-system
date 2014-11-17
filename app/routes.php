@@ -20,4 +20,8 @@ Route::get('admin/dashboard', array('before' => 'auth', function()
 {
     return View::make('admin/dashboard');
 }));
+Route::get('/', function()
+{
+    return View::make('hello');
+});
 
