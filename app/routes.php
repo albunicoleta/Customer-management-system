@@ -25,3 +25,6 @@ Route::get('/', function()
     return View::make('hello');
 });
 
+//api
+Route::get('/admin/api/customers', '\\Api\\CustomerController@getCustomers');
+
