@@ -1,7 +1,7 @@
 <html>
     <head>
-        <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
-        <script src="js/bootstrap.min.js"></script>
+        {{ HTML::style('css/bootstrap.min.css'); }}
+        {{ HTML::script('js/bootstrap.min.js'); }}
     </head>
     <body>
         <div class="container-fluid">
