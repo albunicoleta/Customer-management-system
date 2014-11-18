@@ -11,6 +11,8 @@ use Input;
  */
 class CustomerController extends BaseController {
 
+    protected $collection;
+    
     /**
      * Return a json collection of customers
      * 
@@ -19,20 +21,30 @@ class CustomerController extends BaseController {
     public function getCustomers()
     {
         $postData = Input::all();
+        // check if order by was applied
+        if (isset($postData['sort']) && $postData['sort']){
+            foreach ($postData['sort'] as $attribute => $order) {
+                $this->orderBy($attribute, $order);
+            }
+        }
         // check if user is searching
         if (isset($postData['searchPhrase']) && $postData['searchPhrase']) {
-            $collection = $this->search($postData['searchPhrase']);
+            $this->search($postData['searchPhrase']);
         } 
-        //if no search display all customers
-        else {
-            $collection = Customer::all();
+        
+        // if no search or order by was applied
+        // get all
+        if (!$this->collection) {
+            $this->collection = Customer::all();
+        } else {
+            $this->collection = $this->collection->get();
         }
-
+        
         return array(
             'current' => 1,
-            'rowCount' => count($collection),
-            'rows' => $collection,
-            'total' => count($collection)
+            'rowCount' => count($this->collection),
+            'rows' => $this->collection,
+            'total' => count($this->collection)
         );
     }
     
@@ -40,11 +52,35 @@ class CustomerController extends BaseController {
      * search customer by searchPhrase
      * 
      * @param string $searchPhrase
-     * @return array
+     * @return \Illuminate\Database\Eloquent\Collection
      */
     protected function search($searchPhrase)
     {
-        return Customer::like($searchPhrase)->get();
+        if (!$this->collection) {
+            $this->collection = Customer::like($searchPhrase);
+        } else {
+            $this->collection->like($searchPhrase);
+        }
+        
+        return $this;
+    }
+    
+    /**
+     * 
+     * @param type $attribute
+     * @param type $order
+     * @param type $collection
+     * @return \Illuminate\Database\Eloquent\Collection
+     */
+    protected function orderBy($attribute, $order)
+    {
+        if (!$this->collection) {
+            $this->collection = Customer::orderBy($attribute, $order);
+        } else {
+            $this->collection->orderBy($attribute, $order);
+        }
+        
+        return $this;
     }
 
     /**
