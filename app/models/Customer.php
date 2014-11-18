@@ -20,4 +20,13 @@ class Customer extends Eloquent {
     {
         return $this->belongsToMany('Product')->withTimestamps();
     }
+
+    public function scopeLike($query, $tag)
+    {
+        return $query->where('firstname', 'LIKE', '%' . $tag . '%')
+            ->orWhere('lastname', 'LIKE', '%' . $tag . '%')
+            ->orWhere('address', 'LIKE', '%' . $tag . '%')
+            ->orWhere('email', 'LIKE', '%' . $tag . '%');
+    }
+
 }

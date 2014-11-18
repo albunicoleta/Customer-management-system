@@ -18,7 +18,15 @@ class CustomerController extends BaseController {
      */
     public function getCustomers()
     {
-        $collection = Customer::all();
+        $postData = Input::all();
+        // check if user is searching
+        if (isset($postData['searchPhrase']) && $postData['searchPhrase']) {
+            $collection = $this->search($postData['searchPhrase']);
+        } 
+        //if no search display all customers
+        else {
+            $collection = Customer::all();
+        }
 
         return array(
             'current' => 1,
@@ -27,10 +35,26 @@ class CustomerController extends BaseController {
             'total' => count($collection)
         );
     }
+    
+    /**
+     * search customer by searchPhrase
+     * 
+     * @param string $searchPhrase
+     * @return array
+     */
+    protected function search($searchPhrase)
+    {
+        return Customer::like($searchPhrase)->get();
+    }
 
+    /**
+     * edit customer
+     * 
+     * @param int $id
+     */
     public function editCustomer($id)
     {
-        
+
         $customer = Customer::find($id);
         $postData = Input::all();
         foreach ($postData as $key => $attr) {
@@ -38,14 +62,23 @@ class CustomerController extends BaseController {
         }
         $customer->save();
     }
-    
+
+    /**
+     * delete customer
+     * 
+     * @param int $id
+     */
     public function deleteCustomer($id)
     {
-        
+
         $customer = Customer::find($id);
         $customer->delete();
     }
-    
+
+    /**
+     * create new customer
+     * 
+     */
     public function saveCustomer()
     {
         $customer = new Customer();

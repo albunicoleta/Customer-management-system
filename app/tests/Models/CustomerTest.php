@@ -34,6 +34,28 @@ class CustomerTest extends TestCase {
         $this->assertTrue($newCustomer->products->contains($newProduct->id));
     }
     
+    public function testScopeLike()
+    {
+        $collection = Customer::like('Nicoleta')->get();
+        
+        $this->assertCount(1, $collection);
+    }
+    
+    public function testScopeLike2()
+    {
+        $collection = Customer::like('zxcy')->get();
+        
+        $this->assertEmpty($collection);
+    }
+
+    public function testScopeLike3()
+    {
+        $collection = Customer::like('albunicoleta@gmail.com')->get();
+        
+        $this->assertCount(1, $collection);
+    }
+
+
     public function setUp()
     {
         parent::setUp();
