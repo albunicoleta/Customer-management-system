@@ -67,9 +67,10 @@ class CustomerController extends BaseController {
     
     /**
      * 
-     * @param type $attribute
-     * @param type $order
-     * @param type $collection
+     * Apply order by
+     * 
+     * @param string $attribute
+     * @param string $order
      * @return \Illuminate\Database\Eloquent\Collection
      */
     protected function orderBy($attribute, $order)
