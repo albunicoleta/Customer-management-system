@@ -26,5 +26,7 @@ Route::get('/', function()
 });
 
 //api
-Route::get('/admin/api/customers', '\\Api\\CustomerController@getCustomers');
-
+Route::post('admin/api/customers', '\\Api\\CustomerController@getCustomers');
+Route::post('admin/api/customer/edit/{id}', '\\Api\\CustomerController@editCustomer');
+Route::post('admin/api/customer/delete/{id}', '\\Api\\CustomerController@deleteCustomer');
+Route::post('admin/api/customer/save', '\\Api\\CustomerController@saveCustomer');
