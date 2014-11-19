@@ -12,6 +12,7 @@ class CustomerSeeder extends Seeder {
      */
     public function run()
     {
+        Db::table(Customer::TABLE_NAME)->delete();
         Customer::create(array(
             'firstname' => 'Nicoleta',
             'lastname' => 'Albu',

@@ -12,6 +12,7 @@ class AdminUserSeeder extends Seeder
      */
     public function run()
     {
+        DB::table(Admin::TABLE_NAME)->truncate();
         Admin::create(array('username' => 'admin', 'password' => Hash::make('admin123')));
     }
 }
