@@ -22,6 +22,8 @@ class CreateCustomerTable extends Migration {
             $table->string('email')->unique();
             $table->string('city')->nullable();
             $table->boolean('newsletter')->default(false);
+            $table->integer('group_id')->unsigned()->nullable();
+            $table->foreign('group_id')->references('id')->on(Customergroups::TABLE_NAME);
             $table->timestamps();
         });
     }
