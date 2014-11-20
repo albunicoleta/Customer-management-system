@@ -12,7 +12,7 @@ use Input;
 class CustomerController extends BaseController {
 
     protected $collection;
-    
+
     /**
      * Return a json collection of customers
      * 
@@ -22,7 +22,7 @@ class CustomerController extends BaseController {
     {
         $postData = Input::all();
         // check if order by was applied
-        if (isset($postData['sort']) && $postData['sort']){
+        if (isset($postData['sort']) && $postData['sort']) {
             foreach ($postData['sort'] as $attribute => $order) {
                 $this->orderBy($attribute, $order);
             }
@@ -30,8 +30,8 @@ class CustomerController extends BaseController {
         // check if user is searching
         if (isset($postData['searchPhrase']) && $postData['searchPhrase']) {
             $this->search($postData['searchPhrase']);
-        } 
-        
+        }
+
         // if no search or order by was applied
         // get all
         if (!$this->collection) {
@@ -39,7 +39,7 @@ class CustomerController extends BaseController {
         } else {
             $this->collection = $this->collection->get();
         }
-        
+
         return array(
             'current' => 1,
             'rowCount' => count($this->collection),
@@ -47,7 +47,7 @@ class CustomerController extends BaseController {
             'total' => count($this->collection)
         );
     }
-    
+
     /**
      * search customer by searchPhrase
      * 
@@ -61,10 +61,10 @@ class CustomerController extends BaseController {
         } else {
             $this->collection->like($searchPhrase);
         }
-        
+
         return $this;
     }
-    
+
     /**
      * 
      * Apply order by
@@ -80,7 +80,7 @@ class CustomerController extends BaseController {
         } else {
             $this->collection->orderBy($attribute, $order);
         }
-        
+
         return $this;
     }
 
@@ -125,5 +125,5 @@ class CustomerController extends BaseController {
         }
         $customer->save();
     }
-    
+
 }

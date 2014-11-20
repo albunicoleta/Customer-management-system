@@ -10,14 +10,14 @@ use Illuminate\Database\QueryException;
  * Admin customer groups controller
  */
 class CustomergroupsController extends \Illuminate\Routing\Controller {
-    
+
     protected $collection;
-    
+
     public function getCustomergroups()
     {
         $postData = Input::all();
         // check if order by was applied
-        if (isset($postData['sort']) && $postData['sort']){
+        if (isset($postData['sort']) && $postData['sort']) {
             foreach ($postData['sort'] as $attribute => $order) {
                 $this->orderBy($attribute, $order);
             }
@@ -25,8 +25,8 @@ class CustomergroupsController extends \Illuminate\Routing\Controller {
         // check if user is searching
         if (isset($postData['searchPhrase']) && $postData['searchPhrase']) {
             $this->search($postData['searchPhrase']);
-        } 
-        
+        }
+
         // if no search or order by was applied
         // get all
         if (!$this->collection) {
@@ -34,7 +34,7 @@ class CustomergroupsController extends \Illuminate\Routing\Controller {
         } else {
             $this->collection = $this->collection->get();
         }
-        
+
         return array(
             'current' => 1,
             'rowCount' => count($this->collection),
@@ -42,7 +42,7 @@ class CustomergroupsController extends \Illuminate\Routing\Controller {
             'total' => count($this->collection)
         );
     }
-    
+
     /**
      * search customer by searchPhrase
      * 
@@ -56,10 +56,10 @@ class CustomergroupsController extends \Illuminate\Routing\Controller {
         } else {
             $this->collection->like($searchPhrase);
         }
-        
+
         return $this;
     }
-    
+
     /**
      * 
      * Apply order by
@@ -75,7 +75,7 @@ class CustomergroupsController extends \Illuminate\Routing\Controller {
         } else {
             $this->collection->orderBy($attribute, $order);
         }
-        
+
         return $this;
     }
 
@@ -92,7 +92,7 @@ class CustomergroupsController extends \Illuminate\Routing\Controller {
         }
         $customergroup->save();
     }
-    
+
     /**
      * edit customer group
      * 
@@ -117,18 +117,18 @@ class CustomergroupsController extends \Illuminate\Routing\Controller {
     public function deleteCustomergroup($id)
     {
         $customergroup = Customergroups::find($id);
-        try{
+        try {
             $customergroup->delete();
         } catch (QueryException $ex) {
             return new \Symfony\Component\HttpFoundation\Response('You can only delete if no customer is assigned to the group', 403);
         }
     }
-    
+
     public function viewCustomergroup($id)
     {
 
         $customergroups = Customergroups::find($id);
-        
+
         return $customergroups->customers()->get();
     }
 
