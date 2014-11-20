@@ -26,8 +26,9 @@ $(document).ready(function () {
             var editModal = $("#edit-customer-modal").modal();
             // add groups from db
             $.post('/admin/api/customergroups', function (data) {
+                editModal.find('.dropdown-menu').empty();
                 $.each(data.rows, function (index, value) {
-                    editModal.find('.dropdown-menu').empty().append("<li role=\"presentation\"><a role=\"menuitem\" data-row-id=\"" + value.id + "\" tabindex=\"-1\" href=\"#\">" + value.name + "</a></li>");
+                    editModal.find('.dropdown-menu').append("<li role=\"presentation\"><a role=\"menuitem\" data-row-id=\"" + value.id + "\" tabindex=\"-1\" href=\"#\">" + value.name + "</a></li>");
                 });
             });
 
