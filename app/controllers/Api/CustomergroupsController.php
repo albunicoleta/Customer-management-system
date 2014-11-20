@@ -4,6 +4,7 @@ namespace Api;
 
 use Customergroups;
 use Input;
+use Illuminate\Database\QueryException;
 
 /**
  * Admin customer groups controller
@@ -115,9 +116,12 @@ class CustomergroupsController extends \Illuminate\Routing\Controller {
      */
     public function deleteCustomergroup($id)
     {
-
         $customergroup = Customergroups::find($id);
-        $customergroup->delete();
+        try{
+            $customergroup->delete();
+        } catch (QueryException $ex) {
+            return new \Symfony\Component\HttpFoundation\Response('You can only delete if no customer is assigned to the group', 403);
+        }
     }
     
     public function viewCustomergroup($id)

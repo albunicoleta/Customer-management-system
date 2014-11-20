@@ -14,18 +14,18 @@
         <div class="navbar-collapse collapse" id="navbar">
             <ul class="nav navbar-nav">
                 <li class="active"><a href="#">Users</a></li>
-                <li><a href="#">User groups</a></li>
+                <li><a href="{{ URL::to('admin/groups') }}">User groups</a></li>
             </ul>
         </div><!--/.nav-collapse -->
     </div>
 </nav>
 <div class="container jumbotron" role="main">
     <div class="page-header">
-        <h1>Users</h1>
+        <h1>Customers</h1>
     </div>
     <button type="button" class="btn-primary btn btn-default btn-lg command-add"> 
         <span class="glyphicon glyphicon-plus-sign glyphicon-align-left" aria-hidden="true"></span>
-        Add new user
+        Add new customer
     </button>
     <div class="row">
         <div class="col-md-12">
@@ -68,6 +68,18 @@
                     <div class="form-group">
                         <label for="email" class="control-label">Email:</label>
                         <input type="text" name="email" class="form-control" id="customer-email">
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">Groups:</label>
+                        <div class="dropdown">
+                            <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
+                                Dropdown
+                                <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+                            </ul>
+                            <input id="group-id" type="hidden" name="group_id" value=""/>
+                        </div>
                     </div>
                 </form>
             </div>
@@ -114,6 +126,25 @@
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                 <button type="button" class="btn btn-primary" id="add-customer">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal shopping-->
+<div class="modal fade" id="shopping-customer-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="myModalLabel">Bought Products</h4>
+            </div>
+            <div class="modal-body">
+                <ul id="customer-shopping-modal-list">
+                </ul>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
             </div>
         </div>
     </div>

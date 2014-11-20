@@ -6,6 +6,7 @@
         {{ HTML::script('js/bootstrap.min.js'); }}
         {{ HTML::script('js/jquery.bootgrid.min.js'); }}
         {{ HTML::script('js/application.js'); }}
+        {{ HTML::script('js/customergroup.js'); }}
     </head>
     <body>
         <div class="container-fluid">
