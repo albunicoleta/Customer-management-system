@@ -121,6 +121,18 @@
                         <label for="email" class="control-label">Email:</label>
                         <input type="text" name="email" class="form-control" id="customer-email">
                     </div>
+                    <div class="form-group">
+                        <label class="control-label">Groups:</label>
+                        <div class="dropdown">
+                            <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
+                                Dropdown
+                                <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+                            </ul>
+                            <input id="group-id" type="hidden" name="group_id" value=""/>
+                        </div>
+                    </div>
                 </form>
             </div>
             <div class="modal-footer">

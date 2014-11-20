@@ -32,7 +32,7 @@ $(document).ready(function () {
                 });
             });
 
-            $( document ).on('click' , ".dropdown-menu li a", function () {
+            $(document).on('click', ".dropdown-menu li a", function () {
                 var selText = $(this).text();
                 $("#dropdownMenu1").html(selText + ' <span class="caret"></span>');
                 $(".dropdown #group-id").attr('value', $(this).data('row-id'));
@@ -72,6 +72,19 @@ $(document).ready(function () {
     $(".command-add").on("click", function ()
     {
         var addModal = $("#add-customer-modal").modal();
+        // add groups from db
+        $.post('/admin/api/customergroups', function (data) {
+            addModal.find('.dropdown-menu').empty();
+            $.each(data.rows, function (index, value) {
+                addModal.find('.dropdown-menu').append("<li role=\"presentation\"><a role=\"menuitem\" data-row-id=\"" + value.id + "\" tabindex=\"-1\" href=\"#\">" + value.name + "</a></li>");
+            });
+        });
+
+        $(document).on('click', ".dropdown-menu li a", function () {
+            var selText = $(this).text();
+            $("#dropdownMenu1").html(selText + ' <span class="caret"></span>');
+            $(".dropdown #group-id").attr('value', $(this).data('row-id'));
+        });
         // on 'Save changes' click
         $('#add-customer').click(function () {
             $.post('/admin/api/customer/save', addModal.find('#customer-add-modal-form').serialize());
