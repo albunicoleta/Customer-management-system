@@ -1,4 +1,5 @@
-====Installation
+Installation
+====
 
 1. git clone https://github.com/albunicoleta/Customer-management-system.git
 2. composer install
