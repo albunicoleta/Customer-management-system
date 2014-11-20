@@ -95,7 +95,9 @@ class CustomerController extends BaseController {
         $customer = Customer::find($id);
         $postData = Input::all();
         foreach ($postData as $key => $attr) {
-            $customer->setAttribute($key, $attr);
+            if ($attr) {
+                $customer->setAttribute($key, $attr);
+            }
         }
         $customer->save();
     }

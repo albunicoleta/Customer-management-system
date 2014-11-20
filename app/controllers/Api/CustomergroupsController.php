@@ -104,7 +104,9 @@ class CustomergroupsController extends \Illuminate\Routing\Controller {
         $customergroups = Customergroups::find($id);
         $postData = Input::all();
         foreach ($postData as $key => $attr) {
-            $customergroups->setAttribute($key, $attr);
+            if ($attr) {
+                $customergroups->setAttribute($key, $attr);
+            }
         }
         $customergroups->save();
     }
