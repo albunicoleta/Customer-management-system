@@ -13,13 +13,18 @@ class CustomerSeeder extends Seeder {
     public function run()
     {
         Db::table(Customer::TABLE_NAME)->delete();
+        $customergroups = Customergroups::all()->first();
+        $generalGroup  = Customergroups::where('name', '=', 'General')->firstOrFail();
+        $loggedinGroup = Customergroups::where('name', '=', 'Logged in')->firstOrFail();
+        
         Customer::create(array(
             'firstname' => 'Nicoleta',
             'lastname' => 'Albu',
             'address' => 'Fagului',
             'phone' => '12345678',
             'email' => 'albunicoleta@gmail.com',
-            'city' => 'Galati'
+            'city' => 'Galati',
+            'group_id' => $generalGroup->id
         ));
         Customer::create(array(
             'firstname' => 'Ion',
@@ -27,7 +32,8 @@ class CustomerSeeder extends Seeder {
             'address' => 'Nucului',
             'phone' => '147258369',
             'email' => 'iongeorgescu@gmail.com',
-            'city' => 'Cluj-Napoca'
+            'city' => 'Cluj-Napoca',
+            'group_id' => $loggedinGroup->id
         ));
         Customer::create(array(
             'firstname' => 'Vasile',
@@ -35,7 +41,8 @@ class CustomerSeeder extends Seeder {
             'address' => 'Plopului',
             'phone' => '132495687',
             'email' => 'vasilepopescu@gmail.com',
-            'city' => 'Cluj-Napoca'
+            'city' => 'Cluj-Napoca',
+            'group_id' => $generalGroup->id
         ));
     }
 
