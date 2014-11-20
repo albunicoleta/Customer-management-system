@@ -126,14 +126,4 @@ class CustomerController extends BaseController {
         $customer->save();
     }
     
-    /**
-     * return the customer group id
-     */
-    public function getGroupId($groupId)
-    {
-        $customer = Customer::find($id);
-        
-    }
-    
-
 }
